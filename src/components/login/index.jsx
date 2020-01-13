@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Form, Icon, Input, Button } from 'antd';
-
-
+import { Form, Icon, Input, Button, message } from 'antd';
+import axios from 'axios'
+ 
 import './index.less';
 import logo from './logo.png';
-
+const { Item } = Form ;
 
 class Login extends Component{
     //自定义表单验证方法
@@ -22,8 +22,53 @@ class Login extends Component{
         } else if (!reg.test(value)) {
             callback(`${name}只能包含英文、数字、下划线`);
         }
+        //必须调用一次
+        callback();
     }
 
+    //提交登录按钮
+    login = (e) => {
+        //阻止表单默认行为
+        e.preventDefault();
+        //验证表单输入内容
+        this.props.form.validateFields((err,values) => {
+            /*console.log(err,values);
+             err :表示错误
+             当表单验证失败时会提示err错误原因
+             当表单验证成功err表示null
+             values表示表单的value值
+            */
+           //获取表单输入内容
+            const { username, password } = values;
+            if(!err){
+                //表单验证成功
+                //发送请求
+                axios.post('/api/login',{ username, password })
+                    .then((response) => { 
+                        //console.log(response);
+                        //判断是否请求成功 response.data.status
+                        if(response.data.status === 0){
+                            this.props.history.replace('/')
+                        }else{
+                            //提示错误信息
+                            message.error(response.data.msg)
+                            //清空密码输入框
+                            this.props.form.resetFields(['password'])  
+                        }
+                    })
+                    .catch((err) => {  
+                        console.log(err);
+                        
+                    })
+            }else{
+                //表单验证失败
+
+            }
+            
+        })
+
+    }
+    
     render(){
         const { getFieldDecorator } = this.props.form;
         return <div className='login'>
@@ -33,42 +78,42 @@ class Login extends Component{
            </header>
            <section>
                 <h1>用户登录</h1>
-                <Form className="login-form">
-                <Form.Item>
-                    {//存在缺陷，会重复校验，简单的会使用，一般使用自定义表单校验
-                    /*{getFieldDecorator('username', {
-                    rules: [{ required: true, message: 'Please input your username!' }],
-                     })()}*/}
+                <Form className="login-form" onSubmit = {this.login}>
+                    <Item>
+                        {//存在缺陷，会重复校验，简单的会使用，一般使用自定义表单校验
+                        /*{getFieldDecorator('username', {
+                        rules: [{ required: true, message: 'Please input your username!' }],
+                        })()}*/}
 
-                    {getFieldDecorator('username', {
-                        rules: [{ validator: this.validator }],
-                    })( 
-                        <Input
-                        prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                        placeholder="用户名"
-                        />,
-                    )} 
-                </Form.Item>
-                <Form.Item>
-                   {getFieldDecorator('password', {
-                        rules: [{ validator: this.validator }],
-                    })( 
-                        <Input
-                        className='login-form-password'
-                        prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                        type="password"
-                        placeholder="密码"
-                        />,
-                    )}
-                </Form.Item>    
-               
-                        <Button 
-                        type="primary" 
-                        htmlType="submit" 
-                        className="login-form-button">
-                            登录
-                        </Button>
-            
+                        {getFieldDecorator('username', {
+                            rules: [{ validator: this.validator }],
+                        })( 
+                            <Input
+                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                            placeholder="用户名"
+                            />,
+                        )} 
+                    </Item>
+                    <Item>
+                    {getFieldDecorator('password', {
+                            rules: [{ validator: this.validator }],
+                        })( 
+                            <Input
+                            className='login-form-password'
+                            prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                            type="password"
+                            placeholder="密码"
+                            />,
+                        )}
+                    </Item>    
+                    <Item>       
+                            <Button 
+                            type="primary" 
+                            htmlType="submit" 
+                            className="login-form-button">
+                                登录
+                            </Button>
+                    </Item>
                 </Form>
            </section>
         </div>
