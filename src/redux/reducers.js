@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import SAVE_USER from './action-type';
+import {SAVE_USER} from './action-type';
 import { getItem } from '../utils/storage';
 
 const initUser = getItem('user') || {};

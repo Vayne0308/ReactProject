@@ -4,15 +4,15 @@
  * 同步action
  * 异步action
  */
-import SAVE_USER from './action-type';
-import { reqLogin } from '../../api';
-import { setItem } from '../../utils/storage';
+import {SAVE_USER} from './action-type';
+import { reqLogin } from '../api';
+import { setItem } from '../utils/storage';
 
 //设置同步action
 const saveUser = user => ({
     type: SAVE_USER,
     data: user
-})
+});
 
 
 //异步action
@@ -20,7 +20,7 @@ export const saveUserAsync = (username, password) => {
 
     return dispatch => {
         return reqLogin(username, password)
-        .then((response) => { 
+            .then((response) => { 
             //返回用户数据和token
 
             //存在redux中（内存存储，刷新即没有），还需持久化存储：localStorage

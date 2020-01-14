@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { saveUserAsync } from '../../redux/actions';
 
 import './index.less';
-import logo from './logo.png';
+import logo from '../../assets/imgs/logo.png';
 const { Item } = Form ;
 
 @connect(null, { saveUserAsync })
@@ -43,9 +43,10 @@ class Login extends Component{
              values表示表单的value值
             */
            //获取表单输入内容
-            const { username, password } = values;
+            
             if(!err){
                 //表单验证成功
+                const { username, password } = values;
                 //发送请求
                 //#region 
                 /*

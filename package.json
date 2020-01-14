@@ -47,7 +47,7 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-decorators": "^7.7.0",
+    "@babel/plugin-proposal-decorators": "^7.8.3",
     "babel-plugin-import": "^1.12.2",
     "customize-cra": "^0.9.1",
     "less": "^3.10.3",
@@ -55,5 +55,18 @@
     "react-app-rewired": "^2.1.5",
     "redux-devtools-extension": "^2.13.8"
   },
-  "proxy": "http://47.103.203.152"
+  "proxy": "http://47.103.203.152",
+  "babel": {
+    "plugins": [
+      [
+        "@babel/plugin-proposal-decorators",
+        {
+          "legacy": true
+        }
+      ]
+    ],
+    "presets": [
+      "react-app"
+    ]
+  }
 }
