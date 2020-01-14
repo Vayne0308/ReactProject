@@ -30,7 +30,6 @@ axiosInstance.interceptors.request.use(
                 return prev;
             },'').slice(1);
             //将字符串格式的data数据更新
-            config.data = data;
 
             config.headers['content-type'] = 'application/x-www-form-urlencoded'
         }

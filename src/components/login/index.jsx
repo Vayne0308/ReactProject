@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button, message } from 'antd';
-import axios from 'axios'
- 
+import { connect } from 'react-redux'
+
+import { saveUserAsync } from '../../redux/actions';
+
 import './index.less';
 import logo from './logo.png';
 const { Item } = Form ;
 
+@connect(null, { saveUserAsync })
+@Form.create()
 class Login extends Component{
     //自定义表单验证方法
     validator = (rule, value, callback) =>{
@@ -43,6 +47,8 @@ class Login extends Component{
             if(!err){
                 //表单验证成功
                 //发送请求
+                //#region 
+                /*
                 axios.post('/api/login',{ username, password })
                     .then((response) => { 
                         //console.log(response);
@@ -62,6 +68,16 @@ class Login extends Component{
                         // 清空密码
                         this.props.form.resetFields(['password']);
                     })
+                */
+                //#endregion
+                this.props.saveUserAsync(username, password )
+                    .then(() => {
+                        this.props.history.replace('/');
+                    })
+                    .catch(msg => {
+                        message.error(msg);
+                        this.props.form.resetFields(['password']);
+                    });
             }
         })
 
@@ -118,6 +134,6 @@ class Login extends Component{
     }
 }
 
-export default Form.create()(Login);
-//@Form.create()
-//export default Login ;
+// export default Form.create()(Login);
+
+export default Login ;
