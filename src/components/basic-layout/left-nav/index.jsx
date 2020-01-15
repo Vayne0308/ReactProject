@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import { Menu, Icon } from 'antd';
 import { Link, withRouter } from 'react-router-dom';
 
-
+import menus from '$conf/menu';
 const { SubMenu, Item } = Menu;
-import menus from '$conf/menus';
-
 
 @withRouter   //给子组件传递路由组件的三大属性
-export default class LeftNav extends Component {
+class LeftNav extends Component {
     
     createMenus = menus => {
         //遍历菜单
@@ -84,3 +82,6 @@ export default class LeftNav extends Component {
           ); 
     }
 }
+
+
+export default LeftNav;
