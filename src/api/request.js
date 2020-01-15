@@ -25,12 +25,12 @@ axiosInstance.interceptors.request.use(
         if(config.method === 'post' ){
             const keys = Object.keys(config.data);
             //将data请求体参数转为字符串格式
-            keys.reduce((prev, curr) => {
-                prev += `&${curr} = ${config.data[curr]}`;
+            //将字符串格式的data数据更新,赋值给原数据
+            config.data = keys.reduce((prev, curr) => {
+                prev += `&${curr}=${config.data[curr]}`;
                 return prev;
             },'').slice(1);
-            //将字符串格式的data数据更新
-
+            
             config.headers['content-type'] = 'application/x-www-form-urlencoded'
         }
         return config;

@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { Form, Icon, Input, Button, message } from 'antd';
 import { connect } from 'react-redux'
 
-import { saveUserAsync } from '../../redux/actions';
+import { saveUserAsync } from '$redux/actions';
+import WithCheckLogin from '../with-check-out';
 
 import './index.less';
 import logo from '../../assets/imgs/logo.png';
 const { Item } = Form ;
 
+@WithCheckLogin
 @connect(null, { saveUserAsync })
 @Form.create()
 class Login extends Component{
@@ -122,12 +124,12 @@ class Login extends Component{
                         )}
                     </Item>    
                     <Item>       
-                            <Button 
-                            type="primary" 
-                            htmlType="submit" 
-                            className="login-form-button">
-                                登录
-                            </Button>
+                        <Button 
+                        type="primary" 
+                        htmlType="submit" 
+                        className="login-form-button">
+                            登录
+                        </Button>
                     </Item>
                 </Form>
            </section>

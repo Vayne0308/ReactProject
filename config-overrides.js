@@ -1,5 +1,7 @@
 
 const { override, fixBabelImports, addDecoratorsLegacy, addLessLoader, addWebpackAlias} = require('customize-cra');
+const { resolve } = require('path')
+
 
 module.exports = override(
   //按需加载

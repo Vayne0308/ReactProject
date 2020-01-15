@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 
-export default class Home extends Component{
+import WithCheckLogin from '$cont/with-check-out';
+
+@WithCheckLogin
+class Home extends Component{
 
     render(){
 
@@ -9,3 +12,5 @@ export default class Home extends Component{
         </div>
     }
 }
+
+export default Home;
