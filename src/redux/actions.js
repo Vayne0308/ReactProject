@@ -4,7 +4,7 @@
  * 同步action
  * 异步action
  */
-import {SAVE_USER} from './action-type';
+import {SAVE_USER , REMOVE_USER} from './action-type';
 import { reqLogin } from '../api';
 import { setItem } from '../utils/storage';
 
@@ -14,6 +14,7 @@ const saveUser = user => ({
     data: user
 });
 
+export const removeUser = () => ({type: REMOVE_USER})
 
 //异步action
 export const saveUserAsync = (username, password) => {
