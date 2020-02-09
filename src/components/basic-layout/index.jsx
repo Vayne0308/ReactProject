@@ -7,6 +7,8 @@ import './index.less';
 import LeftNav from './left-nav';
 import HeaderMain from './header-main'
 
+import { FormattedMessage } from 'react-intl';
+
 const { Header, Content, Footer, Sider } = Layout;
 
 
@@ -36,7 +38,9 @@ export default class BaseLayout extends Component {
         <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
           <div className="layout-logo" >
             <img src={logo} alt='logo' />
-            <h1 style={{ display: isDisplay ? 'block' : 'none' }}>硅谷后台</h1>
+            <h1 style={{ display: isDisplay ? 'block' : 'none' }}>
+              <FormattedMessage id='title' /> 
+            </h1>
           </div>
           <LeftNav />
         </Sider>
