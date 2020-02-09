@@ -1,0 +1,42 @@
+.ant-layout-header{
+    height: 80px;
+    .header{
+
+        .header-top{
+            height: 50px;
+            line-height: 50px;
+            text-align: right;
+            margin-right: 10px;
+            .btn-i18n{
+                margin: 0 10px ;
+            }
+        }
+        .header-bottom{
+            border-top: 1px solid #1DA57A;
+            height: 30px;
+            line-height: 30px;
+            display: flex;
+            align-items: center;
+            .header-bottom-left{
+                flex: 1 ;
+                text-align: center;
+                position: relative;
+                &::before{
+                    content: '';
+                    border: 15px solid transparent;
+                    border-top: 15px solid #fff;
+                    position: absolute;
+                    bottom: -29px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    z-index: 1;
+                }
+            }
+            .header-bottom-right{
+                flex: 2;
+                text-align: right;
+                margin-right: 15px;
+            }
+        }
+    }
+}

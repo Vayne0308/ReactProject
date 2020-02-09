@@ -45,7 +45,7 @@ class LeftNav extends Component {
         );
     };
 
-    //创建一个查找方法
+    //创建一个查找展开菜单方法
     findOpenKeys = (pathname, menus) => {
         /*
           遍历数据，找某个元素。
